@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body>
+
+<div class="pure-g wrapper">
+    
+
+<div class="pure-u-1">
+  
+  <div class="header">
+    <h1>Header</h1>
+    <p>Welcome, <%= @user.username%>! Please search for a recipe that you can make for your dinner party. </p>
+  </div>
+
+</div>
+<div class="pure-u-1">
+  <div class="recipe-search">
+    <h2>Search for Recipes</h2>
+    <%= form_tag("/recipes", method: "get") do %>
+    <%= label_tag(:q, "Search recipes:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+    <% end %>
+  </div>
+</div>  
+
+<div class="pure-u-1">
+    
+
+    <div class="recipe-results">
+      <h1>Yummly Data here..</h1>
+      
+      <% @recipes.each do |element| %>
+        
+        <% if element.nominated == false%>
+          <div class="pure-u-1-3 result">
+            <p><%=element.name%></p>
+            <p><%=element.course%></p>
+            <p><%=element.ingredients%></p>
+            <p><%=element.time%></p>
+            <p><%=element.nominated%></p> 
+
+            <form action="recipes#update" method="PUT">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+              <input type="hidden" name="nominated" value="make true">
+              <input type="hidden" name="name" value="<%=element.name%>">
+              <button>Nominate</button>
+            </form>
+          </div>
+              
+        <%end%>
+
+      <%end%>
+
+    </div>
+
+  </div>
+
+  <br><br>
+  <div class="pure-u-1">
+    
+    <div class="nominated">
+      <h1>Nominated Recipes Here</h1>
+      
+      <% @recipes.each do |element| %>
+        <% if element.nominated == true%>
+          <div class="pure-u-1-3 result">
+            <p><%=element.name%></p>
+            <p><%=element.course%></p>
+            <p><%=element.ingredients%></p>
+            <p><%=element.time%></p>     
+            <p><%=element.nominated%></p> 
+            <p>Upvotes:<%=element.upvotes%></p>
+            <br>
+            <form action='/recipes' method="PUT">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+              <input type="hidden" name="upvote" value="yes">
+              <input type="hidden" name="name" value="<%=element.name%>">
+              <button>Upvote</button>
+            </form>
+          </div>
+        <%end%>
+      <%end%>
+    </div>
+  </div>
+  <br><br>
+  <div class="pure-u-1">
+    <div class="dinner-party">
+        <h1>Dinner Party Here</h1>
+        Here is a loop of all the users in the dinner party:<br> 
+        <%@party.users.each do |el|%>
+        <%= el.username %> <br>
+        <% end %>
+        <br><br>
+        
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+.wrapper{
+  text-align: center;
+}
+
+.header {
+  width: 65%;
+  margin: 0 auto;
+  border: 2px solid black;
+}

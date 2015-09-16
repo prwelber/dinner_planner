@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h2>User Log In</h2>
+<!-- log in form for users, this should create a session -->
+ <form action='/sessions/new' method="GET">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <label>
+    Username
+    <input type="text" name="username" />
+  </label>
+
+  <label>
+    Password:
+    <input type="password" name="password">
+  </label>
+  <label>
+    Dinner Party Name:
+    <input type="text" name="dinner_party">
+  </label>
+  <button>Log In</button>
+</form>
+
+
+</body>
+</html>
