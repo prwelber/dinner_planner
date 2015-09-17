@@ -1,0 +1,11 @@
+<!--    <form action="recipes#create" method="POST">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+              <input type="hidden" name="nominated" value="make true">
+              <input type="hidden" name="name" value="<%=element['recipeName']%>">
+              <input type="hidden" name="course" value="<%=element['attributes']['course']%>">
+              <input type="hidden" name="cuisine" value="<%=element['rating']%>">
+              <input type="hidden" name="rating" value="<%=element['ingredients']%>">
+              <input type="hidden" name="time" value="<%= element['totalTimeInSeconds'] %>">
+              <input type="hidden" name="nominated" value="<%=element[:nominated]%>">
+              <button id="nominate-button<%=element[:id]%>" style="color: black;">Nominate</button>
+            </form> -->

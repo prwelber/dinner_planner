@@ -28,6 +28,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'httparty'
 
+gem "jqcloud-rails"
+
+gem 'pry', '~> 0.10.1'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

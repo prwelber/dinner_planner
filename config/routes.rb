@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resource :sessions, only: [:create,:destroy]
   resource :welcome, only: [:index]
-  resource :recipes
+  resources :recipes
 
 
 

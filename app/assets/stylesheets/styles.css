@@ -2,8 +2,41 @@
   text-align: center;
 }
 
-.header {
+.header-box {
   width: 65%;
   margin: 0 auto;
+  margin-bottom: 70px;
   border: 2px solid black;
+}
+
+#nominated-header{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.nominated{
+  margin-bottom: 50px;
+}
+
+.nominated-results{
+  margin-left: 100px;
+}
+
+.search-results{
+  margin-left: 100px;
+}
+
+.result{
+  font-family: "Raleway", sans-serif;
+}
+
+.word-cloud{
+  width: 900px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.word-cloud span{
+  margin-left: 5px;
+  margin-right: 5px;
 }
