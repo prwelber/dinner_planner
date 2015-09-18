@@ -9,3 +9,20 @@
               <input type="hidden" name="nominated" value="<%=element[:nominated]%>">
               <button id="nominate-button<%=element[:id]%>" style="color: black;">Nominate</button>
             </form> -->
+
+
+
+
+            html for each recipe card before semantic
+
+
+              <div id="<%=element[:id]%>" class="three wide column result">
+            <p id="recipe-name<%=element[:id]%>"><%=element['recipeName']%></p>
+            <p id="course<%=element[:id]%>"><%=element['attributes']['course']%></p>
+            <p id="cuisine<%=element[:id]%>"><%=element['attributes']['cuisine']%></p>
+            <p id="rating<%=element[:id]%>">Rating: <%=element['rating']%></p>
+            <p id="ingredients<%=element[:id]%>"><span><%=element['ingredients']%><span></p>
+            <p id="time<%=element[:id]%>">Time: <%=element['totalTimeInSeconds'].to_i / 60 %></p> 
+
+            <button class="nominate-button" id="nominate-button<%=element[:id]%>" style="color: black;">Nominate</button>
+          </div>

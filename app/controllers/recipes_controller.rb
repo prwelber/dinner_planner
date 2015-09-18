@@ -23,12 +23,13 @@ class RecipesController < ApplicationController
     # HTTParty API Request 
     @recipe_results = HTTParty.get('http://api.yummly.com/v1/api/recipes?_app_id='+ENV["yummly_application_id"]+'&_app_key='+ENV["yummly_application_key"]+'&q='+recipe_search)
     
-    # this takes in 6 rando matches
+    # this takes in 8 rando matches
     @recipe_array = @recipe_results['matches'].sample(8)
     # each_with_index loop to edit recipe object
     @recipe_array = @recipe_array.each_with_index do |element, index|
       element[:nominated] = false
       element[:id] = index
+      element[:party_id] = @party[:id]
       element['ingredients'] = element['ingredients'].join(", ")
       if element['attributes']['course']
         element['attributes']['course'] = element['attributes']['course'].join(", ")
@@ -46,22 +47,15 @@ class RecipesController < ApplicationController
     # puts @recipe_results['matches'][0]['totalTimeInSeconds'] / 60
     # puts @recipe_results['matches'][0]['recipeName']
 
-
-    # NOMINATING
-    # if params[:nominated] 
-    #   @recipe = Recipe.find_by(name: params[:name])
-    #   @recipe.nominated = true
-    #   @recipe.save
-    # end
-    # UPVOTING
   end
 
   def update
 
     if params[:upvote]
-      @recipe = Recipe.find_by(name: params[:name])
+      @recipe = Recipe.find_by(id: params[:id])
       @recipe.upvotes = @recipe.upvotes + 1
       @recipe.save
+      render json: @recipe
     end
 
     
@@ -73,7 +67,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create({name: params[:name], course: params[:course], ingredients: params[:ingredients], cuisine: params[:cuisine], rating: params[:rating], time: params[:time], upvotes: 0, nominated: params[:nominated]})
+    @recipe = Recipe.create({name: params[:name], course: params[:course], ingredients: params[:ingredients], cuisine: params[:cuisine], rating: params[:rating], time: params[:time], upvotes: 0, nominated: params[:nominated], party_id: params[:party_id]})
 
     render json: @recipe
 

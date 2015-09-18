@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string  "time"
     t.integer "upvotes"
     t.boolean "nominated"
+    t.integer "party_id"
   end
 
   create_table "users", force: :cascade do |t|

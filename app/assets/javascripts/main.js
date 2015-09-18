@@ -4,10 +4,9 @@ console.log('test')
 // closure!!!!
 
 var nominateButtons = document.getElementsByClassName("nominate-button");
-
+var dataId;
 var buttons = function buttons(number){
-  nominateButtons[number].addEventListener("click", function(){
-    console.log('clicked')
+  nominateButtons[number].addEventListener("click", function(e){
     //grab the value of the button
     //grab the corresponding div
     //move to nominated section
@@ -23,7 +22,7 @@ var buttons = function buttons(number){
     nominatedRecipe.ingredients = $("#ingredients"+number+" span").text()
     nominatedRecipe.time = $("#time"+number).text()
     nominatedRecipe.nominated = true
-    console.log(nominatedRecipe)
+    console.log("nominatedRecipe obj..", nominatedRecipe)
 
     $.ajax({
       type: 'post',
@@ -33,39 +32,54 @@ var buttons = function buttons(number){
         // update dom with datarrr
         console.log('success function logging')
         console.log(data);
-        console.log("the id for this is.. ", data.id)
-
+        dataId = data.id;
       },
       error: function(error) {
         console.log(error)
       }
     })
+    
+    //had to set timeout to get around async...how do i do this?
+    setTimeout(function(){console.log('data.id outside the function..', dataId)},250);   
+    
+    //removes original event listener, now event listener is only for voting
+    e.target.removeEventListener(e.type, arguments.callee);
     $("#nominate-button"+number).text("upvote")
     $("#"+number+" .extra").append('<span>upvotes: </span><span id="'+number+'votes">0</span>');
     //add event listener and ajax call here to edit votes and update votes with jquery
     $("#nominate-button"+number).click(function(){
-      var votes = parseInt($(number+"#votes").text())
-      var votes++
+
+      var votes = Number($(number+"#votes").text())
+      var votes = votes + 1;
       console.log(votes)
+      console.log(typeof(votes))
+      var voteStatus = {};
+      voteStatus.upvote = true;
+      voteStatus.id = dataId;
+      voteStatus.upvotes = votes;
+      console.log("voteStatus data...", voteStatus)
 
       //need to create data object with vote tally {upvotes: votes} or something
 
       //need ajax call that will update votes in DB
       $.ajax({
         type: 'patch',
-        url: '/recipes/:id', //need to grab ID from previous data and put it here
+        url: '/recipes/'+dataId, //need to grab ID from previous data and put it here
         data: voteStatus,
         success: function(data) {
-
+          console.log(data)
+          console.log(data.upvotes +"  "+ data.id)
+          //update num of votes
+          $("#"+number+"votes").text(data.upvotes)
         },
         error: function(error) {
-
+          console.log(error)
         }
       })//end of ajax
     })//end of click function that will add a vote and make ajax call to update votes in DB 
 
   })
-}
+}//end of buttons function
 
 for (var i = 0; i < nominateButtons.length; i++) {
   buttons(i)
