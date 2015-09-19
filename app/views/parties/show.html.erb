@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Members in your party</h1>
+
+  <%@party_members.each do |el|%>
+    <h3><%=el.username%><h3>
+  <%end%>
+
+</body>
+</html>

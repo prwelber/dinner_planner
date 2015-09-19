@@ -13,6 +13,18 @@ Rails.application.routes.draw do
 
   post '/users' => 'users#create'
 
+  # all parties
+  get '/parties' => 'parties#index'
+  # show one party
+  get '/parties/:id' => 'parties#show'
+
+  # form for creating new party
+  get '/parties/new' => 'parties#new'
+
+  # post new party
+  post '/parties' => 'parties#create'
+
+
   # creates new sesh and sends to root
   get '/sessions/new' => 'sessions#new'
 

@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
 
-  def new
+  def new # get /login
     # creates session and sends to root path
+    # store userID in session if two identicla usernames
     puts params[:username]
     user = User.find_by({username: params[:username]})
     
@@ -19,7 +20,7 @@ class SessionsController < ApplicationController
 
   end
 
-  def create
+  def create # post /sessions??
     
     # dinner = Party.find_by("party_name ~* ?", params[:dinner_party]) 
     # puts dinner.party_name 

@@ -13,7 +13,7 @@
   <div class="one wide column">
     <div class="header-box">
       <h1>Header</h1>
-      <h3>Welcome, <%= @user.username%>! Search for a recipe and make it for your dinner party. </h3>
+      <h3>Welcome, <%= @user.username%>, you are part of the dinner party: <%= @party.party_name%>! Search for a recipe and make it for dinner. </h3>
     </div>
 </div>
 <div class="one wide column">
@@ -35,26 +35,35 @@
 <div class="one wide column nominated-results">
   <div class="ui cards nominated">
 
-  <%if @recipe_array.length < 1 %>
+  <%if @recipe_all.length < 1 %>
     <% puts "no recipes" %>
   <%else%>
-    <% @recipe_array.each do |element| %>
+    <% @recipe_all.each do |element| %>
       <% if element[:nominated] == true%>
-        <div class="three wide column result">
-          <p><%=element.name%></p>
-          <p><%=element.course%></p>
-          <p><%=element.ingredients%></p>
-          <p><%=element.time%></p>     
-          <p><%=element.nominated%></p> 
-          <p>Upvotes:<%=element.upvotes%></p>
-          <br>
-          <form action='/recipes' method="PUT">
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-            <input type="hidden" name="upvote" value="yes">
-            <input type="hidden" name="name" value="<%=element.name%>">
-            <button>Upvote</button>
-          </form>
-        </div>
+
+          <div id="nominated-<%=element[:id]%>" class="card">
+            <div class="content">
+              <div class="header">
+                <p id="recipe-name<%=element[:id]%>"><%=element.name%></p>
+              </div>
+              <div class="meta">
+                <p id="course<%=element[:id]%>"><%=element.course%></p>
+                <p id="cuisine<%=element[:id]%>"><%=element.cuisine%></p>
+                <p id="rating<%=element[:id]%>">Rating: <%=element.rating%></p>
+                <p id="time<%=element[:id]%>">Time: <%=element.time.to_i / 60 %></p> 
+                <input type="hidden" name="idFromDB" value="<%=element[:id]%>">
+              </div>
+              <div class="description">
+                <p id="ingredients<%=element[:id]%>"><span><%=element.ingredients%></span></p>
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui one buttons">
+                <div id="upvote-button-<%=element[:id]%>" class="ui basic green button upvote-button">upvote</div>
+              </div>
+              <span>upvotes: </span><span id="upvote-span-<%=element[:id]%>"><%=element.upvotes%></span>
+            </div>
+          </div>
       <%end%>
     <%end%>
    <%end%>
@@ -68,7 +77,7 @@
         <% puts "no recipes" %>
       <%else%>
       <% @recipe_array.each_with_index do |element, index| %>
-           <div id="<%=element[:id]%>" class="card">
+           <div id="<%=element[:id]%>" class="card results-card">
             <div class="content">
               <div class="header">
                 <p id="recipe-name<%=element[:id]%>"><%=element['recipeName']%></p>
@@ -84,9 +93,6 @@
               </div>
             </div>
             <div class="extra content">
-              <div class="ui one buttons">
-                <div id="nominate-button<%=element[:id]%>" class="ui basic green button nominate-button">Nominate</div>
-              </div>
             </div>
           </div>
         <%end%>

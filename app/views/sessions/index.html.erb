@@ -25,6 +25,40 @@
   </label>
   <button>Log In</button>
 </form>
+<br><br><br><br>
+
+  <h2>Create New Party</h2>
+ <form action='/parties' method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <label>
+    Party Name
+    <input type="text" name="party-name" />
+  </label>
+  <h4>Enter the emails of everyone in your dinner party</h4>
+  <label>
+    Member Email:
+    <input type="text" name="username">
+  </label> <br>
+  <label>
+    Member Email:
+    <input type="text" name="username">
+  </label> <br>
+  <label>
+    Member Email:
+    <input type="text" name="username">
+  </label> <br>
+  <label>
+    Member Email:
+    <input type="text" name="username">
+  </label> <br>
+  <label>
+    Member Email:
+    <input type="text" name="username">
+  </label> <br>
+
+  <button>Create</button>
+</form>
+
 
 
 </body>

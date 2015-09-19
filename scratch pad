@@ -26,3 +26,22 @@
 
             <button class="nominate-button" id="nominate-button<%=element[:id]%>" style="color: black;">Nominate</button>
           </div>
+
+
+
+
+             <!-- <div class="three wide column result">
+          <p><%=element.name%></p>
+          <p><%=element.course%></p>
+          <p><%=element.ingredients%></p>
+          <p><%=element.time%></p>     
+          <p><%=element.nominated%></p> 
+          <p>Upvotes:<%=element.upvotes%></p>
+          <br>
+          <form action='/recipes' method="PUT">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+            <input type="hidden" name="upvote" value="yes">
+            <input type="hidden" name="name" value="<%=element.name%>">
+            <button>Upvote</button>
+          </form>
+        </div> -->
