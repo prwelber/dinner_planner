@@ -179,14 +179,12 @@ for (var i = 0; i < voteButtons.length; i++){
       }
 
       //this works when given an object
-      for(i = 0; i< Object.keys(emptyObj).length; i++){
+      for(i = 0; i < Object.keys(emptyObj).length; i++){
         a = Object.keys(emptyObj)[i]
 
         otherArray.push({text: a, weight: emptyObj[a]})
       }
 
-      console.log(ingredient_array)
-      console.log(ingredientList)
       $(function() {
         $(".word-cloud").jQCloud(otherArray);
       });

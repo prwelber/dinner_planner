@@ -3,9 +3,8 @@ class RecipesController < ApplicationController
   def index
 
     # actual_user = User.find(session[:usename])
-    # if logged_in? == true && check_current_user? == true
+    if logged_in? == true 
       # puts logged_in? -- this was true
-      puts check_current_user?
 
       # the issue here is that the params with username, which is needed for
       # check_current_user goes to sessions/new .. and .. get /recipes is where i'm checking for that
@@ -50,6 +49,7 @@ class RecipesController < ApplicationController
   else
         redirect_to "/"
       end
+    end
   end #end of index method
 
   def update

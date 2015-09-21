@@ -1,23 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+
+
+html{
+  text-align: center;
+  background: url("http://g.fastcompany.net/multisite_files/fastcompany/imagecache/1280/poster/2013/07/3015054-poster-1280-cronut-donation.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.home-h2{
+  letter-spacing: 2px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.home-h1{
+  font-size: 4em;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2px;
+}
+
+a{
+  text-decoration: none;
+}
+
+.header-box {
+  width: 65%;
+  margin: 0 auto;
+  margin-bottom: 70px;
+  border: 2px solid black;
+}
+
+#yes-button{
+  font-family: 'Oswald', sans-serif;
+}
+
+#yes-div{
+  text-align: center;
+  height: 100;
+  width: 250px;
+  font-size: 28px;
+  background: rgba(255, 255, 255, 0.5);;
+  margin: 0 auto;
+}
+
+#soylent-div{
+  position: relative;
+  bottom: 20%;
+  left: 2%;
+  height: 90px;
+  width: 80px;
+  background: rgba(255, 255, 255, 0.0);;
+}
+
+#cronut-div{
+  position: relative;
+  bottom: 50%;
+  left: 90%;
+  height: 80px;
+  width: 90px;
+  background: rgba(255, 255, 255, 0.0);;
+}
+
+#yes-text{
+  padding: 20px;
+}
+
+
+</style>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 </head>
 <body>
   
+<div class="home-container">
+  <h1 class="home-h1">Do you want to have a foodgasm?</h1>
+  
+  <div id="yes-div">
+    <a href="/sessions/new">
+      <h2 id="yes-text">Yeah, I do.</h2>
+    </a>
+  </div>
 
-  <h1>Do you want to have a foodgasm?</h1>
+<!--   <a href="https://www.soylent.com/"><h2 id="soylent" class="home-h2">Nope, I don't like foodgasms...</h2></a> -->
 
-  <h3>Yes. Yes, I do.</h3>
-  <a href="/sessions/new">Sign me in</a>
-  <!-- <input type="text" placeholder="email" name="user-name">
-  <input type="text" placeholder="password" name="user-password">
-  <button id="sign-up-button">Sign Up</button> -->
-  <br><br>
-  <h3>Nope, I don't like foodgasms...</h3>
-  <a href="https://www.soylent.com/">Get me out of here</a>
+  <div id="soylent-div">
+    <a href="https://www.soylent.com/">
+      <h4>Nope, I don't like foodgasms.</h4>
+    </a>
+  </div>
 
+  <div id="cronut-div">
+    <a href="https://en.wikipedia.org/wiki/Cronut">
+      <h4 id="yes-text">What is this tasty treat?</h4>
+    </a>
+  </div>
+
+</div>
+
+  
 
 </body>
 </html>

@@ -13,13 +13,13 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def check_current_user?
-    if session[:username] == params[:username]
-      true
-    else
-      false
-    end
-  end
+  # def check_current_user?
+  #   if session[:username] == params[:username]
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
 
 
 

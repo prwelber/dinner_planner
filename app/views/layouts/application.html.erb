@@ -8,11 +8,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if session[:username] %>
-    <%= link_to("Log Out", "/sessions", method: :delete) %>
-    <%= link_to("Recipe Search", "/recipes") %>
-  <% end %>
-<%= link_to('Home', "/")%>
+<div id="nav-bar">
+  <% if session[:username] %>
+      <%= link_to("Log Out", "/sessions", method: :delete) %>
+      <%= link_to("| Recipe Search", "/recipes") %>
+    <% end %>
+  <%= link_to('| Home', "/")%>
+</div>
 
 <%= yield %>
 

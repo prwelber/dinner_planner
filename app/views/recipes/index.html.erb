@@ -10,27 +10,23 @@
 <body>
 
 <div class="wrapper">
+<div class="one wide column">
+  <div class="word-cloud">
+  </div>
+</div>
   <div class="one wide column">
     <div class="header-box">
-      <h1>Header</h1>
-      <h3>Welcome, <%= @user.username%>, you are part of the dinner party: <%= @party.party_name%>! Search for a recipe and make it for dinner. </h3>
+      <h3>Welcome, <%= @user.username%>, you are part of the dinner party: <%= @party.party_name%>. Search for a recipe and whip up something delish! </h3>
     </div>
 </div>
 <div class="one wide column">
   <div class="recipe-search">
       <%= form_tag("/recipes", method: "get") do %>
-      <%= label_tag(:q, "Search recipes:") %>
-      <%= text_field_tag(:q) %>
+      <%= text_field_tag(:q, nil, :placeholder => "search recipes") %>
       <%= submit_tag("Search") %>
       <% end %>
   </div>
 </div>  
-<div class="ui divider"></div>
-<div class="one wide column">
-  <div class="word-cloud">
-  </div>
-</div>
-<div class="ui divider"></div>
 <div id="nominated-header"><h1>Nominated Recipes Will Appear Here</h1></div>
 <div class="one wide column nominated-results">
   <div class="ui cards nominated">

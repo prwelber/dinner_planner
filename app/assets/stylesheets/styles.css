@@ -1,12 +1,20 @@
+body{
+  margin: 0;
+}
+
+#nav-bar{
+  position: absolute;
+  top: 5px;
+  letter-spacing: .5px;
+}
+
 .wrapper{
   text-align: center;
 }
 
-.header-box {
-  width: 65%;
-  margin: 0 auto;
-  margin-bottom: 70px;
-  border: 2px solid black;
+.header-box{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #nominated-header{
