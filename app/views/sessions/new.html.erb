@@ -8,7 +8,7 @@
   
   <h2>User Log In</h2>
 <!-- log in form for users, this should create a session -->
- <form action='/sessions/new' method="GET">
+ <form action='/sessions' method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
   <label>
     Username

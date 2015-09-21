@@ -5,10 +5,10 @@ console.log('test')
 
 var nominateButtons = document.getElementsByClassName("results-card");
 var dataId;
-var dataUpvotes;
+var dataUpvotes = 0;
+
 var buttons = function buttons(number){
   nominateButtons[number].addEventListener("click", function(e){
-    console.log('nomination button clicky event')
     //grab the value of the button
     //grab the corresponding div
     //move to nominated section
@@ -24,7 +24,6 @@ var buttons = function buttons(number){
     nominatedRecipe.ingredients = $("#ingredients"+number+" span").text()
     nominatedRecipe.time = $("#time"+number).text()
     nominatedRecipe.nominated = true
-    console.log("nominatedRecipe obj..", nominatedRecipe)
 
     $.ajax({
       type: 'post',
@@ -32,7 +31,7 @@ var buttons = function buttons(number){
       data: nominatedRecipe,
 
       success: function(data) {
-        // update dom with datarrr
+
         console.log('success function logging')
         console.log(data);
         dataId = data.id;
@@ -46,32 +45,22 @@ var buttons = function buttons(number){
     
     //had to set timeout to get around async...how do i do this?
     setTimeout(function(){console.log('data.id outside the function..', dataId)},250);   
-    
+
+    var one = "<div id='button-upvote-"+number+"' class='ui basic green button button-upvote'>upvote</div></div>";
+    var two = "<span>upvotes: </span><span id='span-upvote-"+number+"'>"+dataUpvotes+"</span>";
+      
+    $("#"+number+" .extra").append("<div class='ui one buttons'>").append(one).append(two)
+
     //removes original event listener, now event listener is only for voting
     e.target.removeEventListener(e.type, arguments.callee);
 
-
-
-
-    $("#"+number+" .extra").append("<div class='ui one buttons'>").append("
-      <div id='button-upvote-"+number+"' class='ui basic green button button-upvote'>upvote</div></div>").append("
-      <span>upvotes: </span><span id='span-upvote-"+number+"'>"+dataUpvotes+"</span>")
-
-
       //adds event listener to class button-upvote, defined on 56
-    $(".button-upvote").click(function(){
-
-
-
-
-
-    //$("#nominate-button"+number).text("upvote")
-    // $("#"+number+" .extra").append('<span>upvotes: </span><span id="'+number+'votes">0</span>');
-    
+    $(".button-upvote").click(function(e){
     //add event listener and ajax call here to edit votes and update votes with jquery
-
+      event.stopPropagation();
+      console.log("event target is ", e.target)
       //converts string to num
-      var votes = Number($(number+"#votes").text())
+      var votes = Number($("#span-upvote-"+number).text())
 
       var votes = votes + 1;
 
@@ -96,7 +85,7 @@ var buttons = function buttons(number){
         success: function(data) {
           console.log(data)
           //update num of votes
-          $("#"+number+"votes").text(data.upvotes)
+          $("#span-upvote-"+number).text(data.upvotes)
         },
         
         error: function(error) {
@@ -134,11 +123,12 @@ var voteButtonClick = function voteButtonClick(num){
       var votes = votes + 1;
 
       var voteStatus = {};
+
       //set voteStatus key/value pairs
       voteStatus.upvote = true;
       voteStatus.id = a;
       voteStatus.upvotes = votes;
-      console.log("voteStatus data...", voteStatus)
+      // console.log("voteStatus data...", voteStatus)
 
       //need to create data object with vote tally {upvotes: votes} or something
 
@@ -148,7 +138,7 @@ var voteButtonClick = function voteButtonClick(num){
         url: '/recipes/'+a, //need to grab ID from previous data and put it here
         data: voteStatus,
         success: function(data) {
-          console.log(data)
+          // console.log(data)
           //update num of votes
           $("#upvote-span-"+a).text(data.upvotes)
         },
@@ -173,23 +163,32 @@ for (var i = 0; i < voteButtons.length; i++){
 
 ////////////word cloud stuff
 
-var ingredient_array = [];
-
-      ingredientList = $("p span").text().split(",")
-      ingredientList.forEach(function(el,index,array){
-        ingredient_array.push({text: el, weight: Math.floor(Math.random() * 7) +6})
-      });
-
-      // sort by function
-      // loop through
-      // each iteration... if doesn't exist, push in, if it does exist, increment the counter for that word
-
-      // make empty obj
-      // Object.keys(yourObj)
+      var emptyObj = {};
+      var otherArray = [];
+      ingredientList = $("p span").text().split(", ")
 
 
+      //inspired by:
+      //http://stackoverflow.com/questions/5667888/counting-the-occurrences-of-javascript-array-elements
+      
+      for(i = 0; i < ingredientList.length; ++i) {
+        if(!emptyObj[ingredientList[i]]) {
+            emptyObj[ingredientList[i]] = 0;
+        }
+        ++emptyObj[ingredientList[i]];
+      }
+
+      //this works when given an object
+      for(i = 0; i< Object.keys(emptyObj).length; i++){
+        a = Object.keys(emptyObj)[i]
+
+        otherArray.push({text: a, weight: emptyObj[a]})
+      }
+
+      console.log(ingredient_array)
+      console.log(ingredientList)
       $(function() {
-        $(".word-cloud").jQCloud(ingredient_array);
+        $(".word-cloud").jQCloud(otherArray);
       });
 
 

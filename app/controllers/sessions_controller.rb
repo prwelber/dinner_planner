@@ -3,6 +3,15 @@ class SessionsController < ApplicationController
   def new # get /login
     # creates session and sends to root path
     # store userID in session if two identicla usernames
+    
+
+  end
+
+  def index
+
+  end
+
+  def create # post /sessions??
     puts params[:username]
     user = User.find_by({username: params[:username]})
     
@@ -13,19 +22,6 @@ class SessionsController < ApplicationController
     else
       redirect_to "/"
     end
-
-  end
-
-  def index
-
-  end
-
-  def create # post /sessions??
-    
-    # dinner = Party.find_by("party_name ~* ?", params[:dinner_party]) 
-    # puts dinner.party_name 
-    # session[:logged_in] = true
-    # redirect_to "/restaurants"
   end
 
   def destroy
@@ -34,3 +30,9 @@ class SessionsController < ApplicationController
   end
 
 end
+
+
+    # dinner = Party.find_by("party_name ~* ?", params[:dinner_party]) 
+    # puts dinner.party_name 
+    # session[:logged_in] = true
+    # redirect_to "/restaurants"
