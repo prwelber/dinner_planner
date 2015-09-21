@@ -32,6 +32,8 @@ gem "jqcloud-rails"
 
 gem 'pry', '~> 0.10.1'
 
+gem 'rails_12factor', group: :production
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
