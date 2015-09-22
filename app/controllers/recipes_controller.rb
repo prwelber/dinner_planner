@@ -2,20 +2,18 @@ class RecipesController < ApplicationController
   
   def index
 
-    # actual_user = User.find(session[:usename])
-    if logged_in? == true 
+    
+    # if logged_in? == true 
       # puts logged_in? -- this was true
 
       # the issue here is that the params with username, which is needed for
       # check_current_user goes to sessions/new .. and .. get /recipes is where i'm checking for that
-
-      # binding.pry
+      puts "about to check if session username"
     if session[:username]
-      # @current_user = User.find(session[:username])
-      # @recipes = Recipe.order(upvotes: :desc)
       @user = User.find_by({username: session[:username]})
       @party = Party.find_by({party_name: session[:dinner_party]})
       @recipe_all = Recipe.order(upvotes: :desc)
+      puts "going to params"
     
 
     if !params[:q]

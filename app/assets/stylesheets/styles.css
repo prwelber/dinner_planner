@@ -5,6 +5,7 @@ body{
 #nav-bar{
   position: absolute;
   top: 5px;
+  right: 50px;
   letter-spacing: .5px;
 }
 
