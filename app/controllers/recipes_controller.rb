@@ -36,9 +36,11 @@ class RecipesController < ApplicationController
       element[:id] = index
       element[:party_id] = @party[:id]
       element['ingredients'] = element['ingredients'].join(", ")
+      
       if element['attributes']['course']
         element['attributes']['course'] = element['attributes']['course'].join(", ")
       end
+      
       if element['attributes']['cuisine']
         element['attributes']['cuisine'] = element['attributes']['cuisine'].join(", ")
       end
@@ -47,7 +49,6 @@ class RecipesController < ApplicationController
   else
         redirect_to "/"
       end
-    end
   end #end of index method
 
   def update
@@ -76,3 +77,5 @@ class RecipesController < ApplicationController
   end
 
 end
+
+
