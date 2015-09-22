@@ -25,7 +25,7 @@ class RecipesController < ApplicationController
     end
   
     # HTTParty API Request 
-    @recipe_results = HTTParty.get('http://api.yummly.com/v1/api/recipes?_app_id='+ENV["yummly_application_id"]+'&_app_key='+ENV["yummly_application_key"]+'&q='+recipe_search)
+    @recipe_results = HTTParty.get('http://api.yummly.com/v1/api/recipes?_app_id='+ENV['yummly_application_id']+'&_app_key='+ENV['yummly_application_key']+'&q='+recipe_search)
     
     # this takes in 8 rando matches
     @recipe_array = @recipe_results['matches'].sample(8)
