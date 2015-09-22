@@ -165,7 +165,7 @@ for (var i = 0; i < voteButtons.length; i++){
 
       var emptyObj = {};
       var otherArray = [];
-      ingredientList = $("p span").text().split(", ")
+      ingredientList = $(".ingreds").text().split(", ")
 
 
       //inspired by:
