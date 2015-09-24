@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  # this is not necessary
   # def check_current_user?
   #   if session[:username] == params[:username]
   #     true
@@ -20,17 +20,6 @@ class ApplicationController < ActionController::Base
   #     false
   #   end
   # end
-
-
-
-
-
-
-
-
-
-
-
 
 
 end

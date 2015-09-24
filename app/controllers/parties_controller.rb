@@ -22,7 +22,8 @@ class PartiesController < ApplicationController
 
   # create new party in DB
   def create
-
+    @party = Party.create(party_name: params[:party_name])
+    redirect_to "/"
   end
 
 end

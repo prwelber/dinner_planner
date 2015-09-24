@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   def new # get /login
     # creates session and sends to root path
     # store userID in session if two identicla usernames
-    
+    @parties = Party.all
 
   end
 
