@@ -12,15 +12,16 @@ class RecipesController < ApplicationController
     if session[:username]
       @user = User.find_by({username: session[:username]})
       @party = Party.find_by({party_name: session[:dinner_party]})
-      @recipe_all = Recipe.order(upvotes: :desc)
-      puts "going to params"
+
+      @recipe_all = Recipe.where(party_id: @party[:id])
     
 
+      # makes default search banana pudding because it's delicious!
     if !params[:q]
       recipe_search = "banana+pudding"
     else
       raw_recipe_search = params[:q]
-      # clean recipe search input
+      # cleans recipe search input
       recipe_search = raw_recipe_search.gsub(/\s/, "+").to_s
     end
   
@@ -29,8 +30,8 @@ class RecipesController < ApplicationController
     
     # this takes in 8 rando matches
     @recipe_array = @recipe_results['matches'].sample(8)
+    
     # each_with_index loop to edit recipe object
-
     @recipe_array = @recipe_array.each_with_index do |element, index|
       element[:nominated] = false
       element[:id] = index
@@ -45,7 +46,6 @@ class RecipesController < ApplicationController
         element['attributes']['cuisine'] = element['attributes']['cuisine'].join(", ")
       end
     end
-
   else
         redirect_to "/"
       end

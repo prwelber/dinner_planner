@@ -1,6 +1,7 @@
 $(document).ready(function() {
 console.log('test')
 
+
 // closure!!!!
 
 var nominateButtons = document.getElementsByClassName("results-card");
@@ -16,14 +17,17 @@ var buttons = function buttons(number){
     console.log("should have moved")
     console.log(event.target)
 
+
+    //gather up information on nominated recipe
     var nominatedRecipe = {};
-    nominatedRecipe.name = $("#recipe-name"+number).text()
-    nominatedRecipe.course = $("#course"+number).text()
-    nominatedRecipe.cuisine = $("#cuisine"+number).text()
-    nominatedRecipe.rating = $("#rating"+number).text()
-    nominatedRecipe.ingredients = $("#ingredients"+number+" span").text()
-    nominatedRecipe.time = $("#time"+number).text()
+    nominatedRecipe.name = $("#recipe-name"+number).text();
+    nominatedRecipe.course = $("#course"+number).text();
+    nominatedRecipe.cuisine = $("#cuisine"+number).text();
+    nominatedRecipe.rating = $("#rating"+number).text();
+    nominatedRecipe.ingredients = $("#ingredients"+number+" span").text();
+    nominatedRecipe.time = $("#time"+number).text();
     nominatedRecipe.nominated = true
+    nominatedRecipe.party_id = parseInt($("#hiddenParty"+number).val());
 
     $.ajax({
       type: 'post',
@@ -150,6 +154,7 @@ var voteButtonClick = function voteButtonClick(num){
 } 
 
 
+//closure helpers
 
 for (var i = 0; i < nominateButtons.length; i++) {
   buttons(i)

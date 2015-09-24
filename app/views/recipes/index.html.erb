@@ -83,12 +83,14 @@
                 <p id="cuisine<%=element[:id]%>"><%=element['attributes']['cuisine']%></p>
                 <p id="rating<%=element[:id]%>">Rating: <%=element['rating']%></p>
                 <p id="time<%=element[:id]%>">Time: <%=element['totalTimeInSeconds'].to_i / 60 %></p> 
+                <input id="hiddenParty<%=element[:id]%>" type="hidden" name="party_id" value="<%=element[:party_id]%>">
               </div>
               <div class="description">
                 <p id="ingredients<%=element[:id]%>"><span class="ingreds"><%=element['ingredients']%></span></p>
               </div>
             </div>
             <div class="extra content">
+
             </div>
           </div>
         <%end%>
