@@ -10,9 +10,7 @@ var dataUpvotes = 0;
 
 var buttons = function buttons(number){
   nominateButtons[number].addEventListener("click", function(e){
-    //grab the value of the button
-    //grab the corresponding div
-    //move to nominated section
+
     $("#"+number).appendTo(".nominated")
     console.log("should have moved")
     console.log(event.target)
@@ -47,16 +45,17 @@ var buttons = function buttons(number){
       }
     })
     
+    //removes original event listener, now event listener is only for voting and delete
+    e.target.removeEventListener(e.type, arguments.callee);
+
+
     //had to set timeout to get around async...how do i do this?
     setTimeout(function(){console.log('data.id outside the function..', dataId)},250);   
 
     var one = "<div id='button-upvote-"+number+"' class='ui basic green button button-upvote'>upvote</div></div>";
-    var two = "<span>upvotes: </span><span id='span-upvote-"+number+"'>"+dataUpvotes+"</span>";
+    var two = "<span>upvotes: </span><span class='votes-num' id='span-upvote-"+number+"'>"+dataUpvotes+"</span>";
       
-    $("#"+number+" .extra").append("<div class='ui one buttons'>").append(one).append(two)
-
-    //removes original event listener, now event listener is only for voting
-    e.target.removeEventListener(e.type, arguments.callee);
+    $("#"+number+" .extra").append("<div class='ui one buttons'>").append(one).append(two);
 
       //adds event listener to class button-upvote, defined on 56
     $(".button-upvote").click(function(e){
@@ -101,67 +100,23 @@ var buttons = function buttons(number){
     })//end of click function that will add a vote and make ajax call to update votes in DB 
   
   })
-
 }//end of buttons function
 
 
 
-var voteButtons = document.getElementsByClassName("upvote-button");
-
-var voteButtonClick = function voteButtonClick(num){
-  voteButtons[num].addEventListener("click", function(e){
-    console.log('upvote button clicked')
-      
-      //make event target into a jquery object
-      a = $(event.target)
-      //grab id attribute
-      a = a.attr("id")
-      //take last character in string
-      a = a.substr(a.length - 1)
-
-      console.log(a)
-    
-      // $(".upvote-button").one("click", function(){
-      var votes = Number($(a+"#votes").text())
-
-      var votes = votes + 1;
-
-      var voteStatus = {};
-
-      //set voteStatus key/value pairs
-      voteStatus.upvote = true;
-      voteStatus.id = a;
-      voteStatus.upvotes = votes;
-      // console.log("voteStatus data...", voteStatus)
-
-      //need to create data object with vote tally {upvotes: votes} or something
-
-      //need ajax call that will update votes in DB
-      $.ajax({
-        type: 'patch',
-        url: '/recipes/'+a, //need to grab ID from previous data and put it here
-        data: voteStatus,
-        success: function(data) {
-          // console.log(data)
-          //update num of votes
-          $("#upvote-span-"+a).text(data.upvotes)
-        },
-        error: function(error) {
-          console.log(error)
-        }
-      })//end of ajax
-   })
-} 
 
 
-//closure helpers
+
+
+
+
+
+//closure helper
 
 for (var i = 0; i < nominateButtons.length; i++) {
   buttons(i)
 }
-for (var i = 0; i < voteButtons.length; i++){
-  voteButtonClick(i)
-}
+
 
 
 
@@ -193,6 +148,39 @@ for (var i = 0; i < voteButtons.length; i++){
       $(function() {
         $(".word-cloud").jQCloud(otherArray);
       });
+
+
+//////////////ends word cloud stuff
+
+
+
+
+
+
+// a.parent().parent().css("background-color", "blue")
+
+// parseInt()
+
+
+// voteCounter.forEach(function(el, index, array){
+//   if (parseInt(el.text()) > 5) {
+//   this.voteCounter.parent().parent().css("background-color", rgba(0, 255, 255, 0.5))
+// }
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

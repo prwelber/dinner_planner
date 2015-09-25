@@ -12,10 +12,9 @@ class RecipesController < ApplicationController
       # binding.pry
     if session[:username]
       # @current_user = User.find(session[:username])
-      # @recipes = Recipe.order(upvotes: :desc)
       @user = User.find_by({username: session[:username]})
       @party = Party.find_by({party_name: session[:dinner_party]})
-      @recipe_all = Recipe.where(party_id: @party[:id])
+      @recipe_all = Recipe.where(party_id: @party[:id]).order(upvotes: :desc)
     
 
       # makes default search banana pudding because it's delicious!
@@ -75,6 +74,12 @@ class RecipesController < ApplicationController
     render json: @recipe
 
     # redirect_to "/recipes"
+  end
+
+  def destroy
+    @recipe = Recipe.find_by(id: params[:id])
+    @recipe.destroy
+    render json: @recipe
   end
 
 end

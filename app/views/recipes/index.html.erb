@@ -10,15 +10,18 @@
 <body>
 
 <div class="wrapper">
+
 <div class="one wide column">
-  <div class="word-cloud">
-  </div>
-</div>
-  <div class="one wide column">
     <div class="header-box">
       <h3>Welcome, <%= @user.username%>, you are part of the dinner party: <%= @party.party_name%>. Search for a recipe and whip up something delish! </h3>
     </div>
 </div>
+
+<div class="one wide column">
+  <div class="word-cloud">
+  </div>
+</div>
+
 <div class="one wide column">
   <div class="recipe-search">
       <%= form_tag("/recipes", method: "get") do %>
@@ -27,7 +30,10 @@
       <% end %>
   </div>
 </div>  
-<div id="nominated-header"><h1>Nominated Recipes Will Appear Here</h1></div>
+<div id="nominated-header">
+  <h1>Nominated Recipes Will Appear Here</h1>
+  <h4 id="results-h4">A Darker Background Represents a Higher Vote Count</h4>
+</div>
 <div class="one wide column nominated-results">
   <div class="ui cards nominated">
 
@@ -38,6 +44,7 @@
       <% if element[:nominated] == true%>
 
           <div id="nominated-<%=element[:id]%>" class="card">
+            <div class="delete">remove</div>
             <div class="content">
               <div class="header">
                 <p id="recipe-name<%=element[:id]%>"><%=element.name%></p>
@@ -57,7 +64,7 @@
               <div class="ui one buttons">
                 <div id="upvote-button-<%=element[:id]%>" class="ui basic green button upvote-button">upvote</div>
               </div>
-              <span>upvotes: </span><span id="upvote-span-<%=element[:id]%>"><%=element.upvotes%></span>
+              <span>upvotes: </span><span id="upvote-span-<%=element[:id]%>" class="votes-num"><%=element.upvotes%></span>
             </div>
           </div>
       <%end%>
@@ -66,7 +73,10 @@
   </div>
 </div>
 <div class="ui divider"></div>
-<div><h1>Search Results</h1></div>
+<div>
+  <h1 id="search-results-h1">Search Results</h1>
+  <h4 id="results-h4">Click Recipe Card to Nominate</h4>
+</div>
 <div class="one wide column search-results">
   <div class="ui cards">
       <% if @recipe_array.length < 1 %>
@@ -100,12 +110,18 @@
 <div class="ui divider"></div>
   <div class="one wide column">
     <div class="dinner-party">
-        <h1>Dinner Party Here</h1>
-        Here is a loop of all the users in the dinner party:<br> 
+        <h1>Dinner Party Members</h1>
+        <ul id="party-member-list">
         <%@party.users.each do |el|%>
-          <%= el.username %> <br>
+          <li class="dinner-party-member"><%= el.username %></li>
         <% end %>
+        </ul>
     </div>
+  </div>
+  <div class="ui divider"></div>
+  <br><br><br><br><br><br><br><br><br><br>
+  <div>
+    <p>&copy; Foodgasm 2015 All rights reserved. </p><br><br><br>
   </div>
 </div>
 
