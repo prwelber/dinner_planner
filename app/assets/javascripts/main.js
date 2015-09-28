@@ -104,13 +104,6 @@ var buttons = function buttons(number){
 
 
 
-
-
-
-
-
-
-
 //closure helper
 
 for (var i = 0; i < nominateButtons.length; i++) {
@@ -151,37 +144,5 @@ for (var i = 0; i < nominateButtons.length; i++) {
 
 
 //////////////ends word cloud stuff
-
-
-
-
-
-
-// a.parent().parent().css("background-color", "blue")
-
-// parseInt()
-
-
-// voteCounter.forEach(function(el, index, array){
-//   if (parseInt(el.text()) > 5) {
-//   this.voteCounter.parent().parent().css("background-color", rgba(0, 255, 255, 0.5))
-// }
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 })
