@@ -6,106 +6,114 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.js"></script>
-
-
-
-  <style>
-  html{
+<style>
+  .wrapper{
+    width: 100%;
+    height: 100%;
+  }
+  #sign-in{
+    width: 40%;
+    height: 40%;
+    display: inline-table;
     text-align: center;
+    margin-top: 75px;
+    margin-right: 10px;
+  }
+  #create-user{
+    width: 40%;
+    height: 40%;
+    display: inline-table;
+    text-align: center;
+    margin-top: 75px;
+    margin-left: 10px;
   }
 
-  .field{
-    width: 250px;
+  #party-name-label{
+    margin-bottom: 0px;
   }
 
-  #login-form{
-    display: inline-block;
-  }
-
-  #join-party-form{
-    display: inline-block;  
-  }
-
-  </style>
+</style>
 </head>
 <body>
-<h4 class="ui horizontal divider header">
-  <i class="sign in icon"></i>
-  Returning User Sign In
-</h4>
-<!-- log in form for users, this should create a session -->
- <form id="login-form" class="ui form" action='/sessions' method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-    <div class="field">
-      <label>
-        Username
-        <input type="text" name="username" />
-      </label>
-    </div>
-    <div class="field">
-      <label>
-        Password:
-        <input type="password" name="password">
-      </label>
-    </div>
-    <div class="field">
-      <label>
-        Party Name:
-        <input type="text" name="dinner_party">
-      </label>
-    </div>
-  <button class="ui button" type="submit">Submit</button>
-</form>
-<p>***For Science Fair purposes: username and password are 'admin' and dinner party name is 'dinner party'***</p>
 
-<h4 class="ui horizontal divider header">
-  <i class="add user icon"></i>
-  Create user and join a party
-</h4>
+<div class="wrapper">
+ 
+  <div id="sign-in">
+    <h3 class="ui horizontal divider header">
+      <i class="sign in icon"></i>
+      Returning User Sign In
+    </h3>
+    <!-- log in form for users, this should create a session -->
+     <form id="login-form" class="ui form" action='/sessions' method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+        <div class="field">
+          <label>
+            Username
+            <input type="text" name="username" />
+          </label>
+        </div>
+        <div class="field">
+          <label>
+            Password:
+            <input type="password" name="password">
+          </label>
+        </div>
+        <div class="field">
+          <label>
+            Party Name:
+            <input type="text" name="dinner_party">
+          </label>
+        </div>
+      <button class="ui primary button" type="submit">Welcome back</button>
+    </form>
+  </div>
+  
+  <div id="create-user">
+    <h3 class="ui horizontal divider header">
+      <i class="add user icon"></i>
+      Create user and join a party
+    </h3>
+     <form id="join-party-form" class="ui form" action='/users' method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+        <div class="field">
+          <label>
+            What do you want your username to be?
+            <input type="text" name="username" />
+          </label>
+        </div>
+        <div class="field">
+          <label>
+            Password:
+            <input type="password" name="password">
+          </label>
+        </div>
+        <div class="field">
+          <label id="party-name-label">Party Name</label>
+            <select class="ui dropdown" name="dinner_party">
+              <!-- each loop over @parties instance to fill dropdown with existing parties -->
+              <% @parties.each do |element| %>
+              <option name="dinner_party" value="<%=element.party_name%>"><%=element.party_name%></option>
+              <% end %>
+            </select>
+        </div>
+      <button class="ui primary button" type="submit">Create and Join!</button>
+    </form>
+  </div>
+  <h3 class="ui horizontal divider header">
+    <i class="users icon"></i>
+    Create a party
+  </h3>
+   <form action='/parties' method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <label>
+      Party Name
+      <input type="text" name="party_name" />
+    </label><br><br>
+    <button class="ui primary button">Get this party started</button>
+  </form>
+</div>
 
 
- <form id="join-party-form" class="ui form" action='/users' method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-    <div class="field">
-      <label>
-        What do you want your username to be?
-        <input type="text" name="username" />
-      </label>
-    </div>
-    <div class="field">
-      <label>
-        Password:
-        <input type="password" name="password">
-      </label>
-    </div>
-    <div class="field">
-      <label>Party Name</label>
-        <select class="ui dropdown" name="dinner_party">
-
-          <!-- each loop over @parties instance to fill dropdown with existing parties -->
-          <% @parties.each do |element| %>
-          <option name="dinner_party" value="<%=element.party_name%>"><%=element.party_name%></option>
-          <% end %>
-
-        </select>
-    </div>
-  <button class="ui button" type="submit">Submit</button>
-</form>
-
-
-<h4 class="ui horizontal divider header">
-  <i class="users icon"></i>
-  Create a party
-</h4>
-
- <form action='/parties' method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-  <label>
-    Party Name
-    <input type="text" name="party_name" />
-  </label>
-  <button>Get this party started!</button>
-</form>
 
 
 <script>
@@ -113,7 +121,6 @@
 $('select.dropdown')
   .dropdown()
 ;
-
 </script>
 </body>
 </html>

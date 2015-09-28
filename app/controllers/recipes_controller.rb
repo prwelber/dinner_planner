@@ -10,10 +10,10 @@ class RecipesController < ApplicationController
       # check_current_user goes to sessions/new .. and .. get /recipes is where i'm checking for that
       puts "about to check if session username"
     if session[:username]
+      # @current_user = User.find(session[:username])
       @user = User.find_by({username: session[:username]})
       @party = Party.find_by({party_name: session[:dinner_party]})
-
-      @recipe_all = Recipe.where(party_id: @party[:id])
+      @recipe_all = Recipe.where(party_id: @party[:id]).order(upvotes: :desc)
     
 
       # makes default search banana pudding because it's delicious!
@@ -76,6 +76,10 @@ class RecipesController < ApplicationController
     # redirect_to "/recipes"
   end
 
+  def destroy
+    @recipe = Recipe.find_by(id: params[:id])
+    @recipe.destroy
+    render json: @recipe
+  end
+
 end
-
-

@@ -1,4 +1,4 @@
-#Foodgasm# aka ##Dinner Party Meal Planner##
+#Foodgasm#
 
 
 ##Objective##
