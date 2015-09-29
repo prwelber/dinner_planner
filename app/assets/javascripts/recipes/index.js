@@ -27,8 +27,6 @@ $(".delete").on('click', function(event){
 })//ends click function
 
 
-
-
 var voteButtons = document.getElementsByClassName("upvote-button");
 
 var voteButtonClick = function voteButtonClick(num){
@@ -76,10 +74,9 @@ for (var i = 0; i < voteButtons.length; i++){
 
 
 
-
+//////change color based on num of votes////////
 $(".upvote-button").on('click', function(event){
 	// console.log(event.target)
-
 	$voteNum = $(event.target).parent().parent().find(".votes-num").text()
 	$parentDiv = $(event.target).closest(".card")
 	// console.log($voteNum)
@@ -95,6 +92,7 @@ $(".upvote-button").on('click', function(event){
 		$parentDiv.css("background-color", "rgba(0, 255, 255, 0.3)")
 	}
 })
+////end of color change on num of votes////////
 
 
 ///////////to assign colors on page DOM load
@@ -103,8 +101,6 @@ for(i = 0; i < allTheVotes.length; i++){
 	$toGetParent = $(allTheVotes[i]).closest(".card")
 	var $numVotes = $(allTheVotes[i]).text()
 	var actualNum = parseInt($numVotes);
-	// console.log("type of actualNum", typeof(actualNum));
-	// console.log("val of actualNum", actualNum)
 		if (actualNum >= 14) {
 			$toGetParent.closest(".card").css("background-color", "rgba(0, 100, 215, 0.3)")
 		} else if (actualNum >= 9) {
@@ -116,6 +112,25 @@ for(i = 0; i < allTheVotes.length; i++){
 		}
 }
 ////////end of assinging colors on page DOM load
+
+
+
+
+////////////get num and compare to sibling div's number...
+///swap divs if num is larger....get comparing
+
+// var recipeArray = [];
+
+// var sortAndMove = function sortAndMove(){
+//   var allTheVotes = $(".votes-num")
+//   $toGetParent = $(allTheVotes[i]).closest(".card")
+
+
+
+
+// }
+
+
 
 
 

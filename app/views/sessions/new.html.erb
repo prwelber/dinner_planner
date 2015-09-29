@@ -17,7 +17,7 @@
     display: inline-table;
     text-align: center;
     margin-top: 75px;
-    margin-right: 10px;
+    margin-right: 25px;
   }
   #create-user{
     width: 40%;
@@ -25,11 +25,15 @@
     display: inline-table;
     text-align: center;
     margin-top: 75px;
-    margin-left: 10px;
+    margin-left: 25px;
   }
 
   #party-name-label{
     margin-bottom: 0px;
+  }
+
+  p{
+    font-size: 16px;
   }
 
 </style>
@@ -37,7 +41,8 @@
 <body>
 
 <div class="wrapper">
- 
+<br><br><br>
+ <p>***For illustrative purposes, you can sign in with a username <i>and</i> password of <b>admin</b> and the dinner party name is <b>dinner party</b>***</p>
   <div id="sign-in">
     <h3 class="ui horizontal divider header">
       <i class="sign in icon"></i>
@@ -49,7 +54,7 @@
         <div class="field">
           <label>
             Username
-            <input type="text" name="username" />
+            <input type="text" name="username" placeholder="admin" />
           </label>
         </div>
         <div class="field">
@@ -61,7 +66,7 @@
         <div class="field">
           <label>
             Party Name:
-            <input type="text" name="dinner_party">
+            <input type="text" name="dinner_party" placeholder="dinner party">
           </label>
         </div>
       <button class="ui primary button" type="submit">Welcome back</button>
@@ -112,9 +117,6 @@
     <button class="ui primary button">Get this party started</button>
   </form>
 </div>
-
-
-
 
 <script>
   //dropdown on log in page for semantic ui

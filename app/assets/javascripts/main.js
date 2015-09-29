@@ -1,15 +1,19 @@
 $(document).ready(function() {
 console.log('test')
 
-
 // closure!!!!
-
 var nominateButtons = document.getElementsByClassName("results-card");
 var dataId;
 var dataUpvotes = 0;
 
 var buttons = function buttons(number){
   nominateButtons[number].addEventListener("click", function(e){
+
+    var appendButton = function appendButton(){
+      var one = "<div id='button-upvote-"+number+"' class='ui basic green button button-upvote'>upvote</div></div>";
+      var two = "<span>upvotes: </span><span class='votes-num' id='span-upvote-"+number+"'>"+dataUpvotes+"</span>";
+      $("#"+number+" .extra").append("<div class='ui one buttons'>").append(one).append(two);
+    }
 
     $("#"+number).appendTo(".nominated")
     console.log("should have moved")
@@ -48,14 +52,10 @@ var buttons = function buttons(number){
     //removes original event listener, now event listener is only for voting and delete
     e.target.removeEventListener(e.type, arguments.callee);
 
-
     //had to set timeout to get around async...how do i do this?
     setTimeout(function(){console.log('data.id outside the function..', dataId)},250);   
 
-    var one = "<div id='button-upvote-"+number+"' class='ui basic green button button-upvote'>upvote</div></div>";
-    var two = "<span>upvotes: </span><span class='votes-num' id='span-upvote-"+number+"'>"+dataUpvotes+"</span>";
-      
-    $("#"+number+" .extra").append("<div class='ui one buttons'>").append(one).append(two);
+    appendButton()
 
       //adds event listener to class button-upvote, defined on 56
     $(".button-upvote").click(function(e){
